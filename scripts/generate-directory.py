@@ -21,6 +21,7 @@ def parse_frontmatter(content):
     
     frontmatter = {}
     fm_text = match.group(1)
+    current_key = None
     for line in fm_text.split('\n'):
         line = line.strip()
         if not line:
@@ -30,12 +31,13 @@ def parse_frontmatter(content):
             # 列表类型，后面逐行读取
             key = line.split(':')[0].strip()
             frontmatter[key] = []
+            current_key = key
             continue
         if line.startswith('- '):
-            # 这是列表项，添加到最后一个key
-            if 'current_key' in locals() and frontmatter.get('current_key') is not None:
+            # 这是列表项，添加到当前key
+            if current_key is not None:
                 item = line[2:].strip()
-                if ':' in item:
+                if ':' in item and current_key == 'skills':
                     skill_name, skill_desc = item.split(':', 1)
                     frontmatter[current_key].append({'name': skill_name.strip(), 'desc': skill_desc.strip()})
                 else:
