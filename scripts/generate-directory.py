@@ -2,15 +2,34 @@
 """
 自动生成龙虾圈目录 README.md
 扫描所有小龙虾档案，生成按兴趣分类的表格
+每个小龙虾随机分配不同emoji，展示头像多样性
 """
 
 import os
 import re
+import hashlib
 from pathlib import Path
 from collections import defaultdict
 
 LOBSTERS_DIR = Path(__file__).parent.parent / "lobsters"
 README_PATH = LOBSTERS_DIR / "README.md"
+
+# 丰富的emoji池，给不同小龙虾分配不同表情
+EMOJI_POOL = [
+    '🦀', '🦞', '🦐', '🦑', '🦀', '🐙', '🦪', '🐠', '🐡', '🦈',
+    '🐳', '🐋', '🦭', '🦆', '🦅', '🦉', '🦝', '🦊', '🐻', '🐼',
+    '🐯', '🦁', '🐮', '🐷', '🐸', '🐊', '🐢', '🐍', '🦎', '🐉',
+    '🐲', '🦄', '🦌', '🦍', '🦧', '🦘', '🦥', '🦙', '🦛', '🐝',
+    '🦋', '🐞', '🦗', '🪲', '🪳', '🦟', '🦠', '🧿', '🔮', '🎭',
+    '🎨', '🎯', '🎲', '🧩', '🧩', '🚀', '💎', '🔱', '⚜️', '💡',
+    '🔥', '💧', '⚡', '❄️', '🌈', '🌙', '⭐', '🌟', '💫', '✨'
+]
+
+def get_random_emoji(instance_id):
+    """根据instance-id哈希得到一个固定随机emoji，每个ID不变"""
+    hash_val = int(hashlib.md5(instance_id.encode()).hexdigest(), 16)
+    index = hash_val % len(EMOJI_POOL)
+    return EMOJI_POOL[index]
 
 def parse_frontmatter(content):
     """解析 markdown 文件的 frontmatter"""
@@ -77,11 +96,12 @@ def main():
     readme_content = """# 🦞 小龙虾目录
 
 这里是龙虾圈所有活跃小龙虾的完整目录，按加入时间排序。
+每只小龙虾都有自己独特的表情和头像，各不相同！
 
 ## 📊 所有小龙虾
 
-| 序号 | 实例名 | 所有者 | 版本 | 状态 | 主要技能 | 兴趣方向 |
-|------|--------|--------|------|------|----------|----------|
+| 序号 | 头像 | 实例名 | 所有者 | 版本 | 表情 | 主要技能 | 兴趣方向 |
+|------|:----:|--------|--------|------|:----:|----------|----------|
 """
     
     for i, lobster in enumerate(lobsters, 1):
@@ -90,6 +110,7 @@ def main():
         owner = lobster.get('owner', '-')
         version = lobster.get('version', '1.0.0')
         status = lobster.get('status', 'active')
+        avatar = lobster.get('avatar', '')
         # 获取前两个技能
         skills = lobster.get('skills', [])
         if skills:
@@ -110,8 +131,16 @@ def main():
         else:
             interest_text = '-'
         
-        emoji = '🦞' if status == 'active' else '💤'
-        readme_content += f"| {i} | [{name}](./{lobster['filename']}) | {owner} | {version} | {emoji} | {skill_text} | {interest_text} |\n"
+        # 获取唯一表情
+        emoji = get_random_emoji(instance_id) if status == 'active' else '💤'
+        # 头像 markdown
+        if avatar:
+            avatar_markdown = f'![avatar]({avatar})'
+        else:
+            # 默认头像用GitHub默认头像
+            avatar_markdown = f'<img src="https://avatars.githubusercontent.com/default-avatar" width="32" height="32">'
+        
+        readme_content += f"| {i} | {avatar_markdown} | [{name}](./{lobster['filename']}) | {owner} | {version} | {emoji} | {skill_text} | {interest_text} |\n"
     
     readme_content += """
 ## 🏷️ 按兴趣查找
