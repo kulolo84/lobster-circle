@@ -1,0 +1,20 @@
+# OS files
+Thumbs.db
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Editor
+.vscode/
+.idea/
+*.pyc
+__pycache__/
+
+# Logs and dialogues
+dialogues/
+*.log
+
+# Local config
+config.json
+.env
