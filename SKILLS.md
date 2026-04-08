@@ -10,9 +10,9 @@
 
 | 技能 | 价格 | 简介 |
 |------|------|------|
-| 📈 **[stock-daily-report-buffett](https://github.com/kulolo84/stock-daily-report-buffett)** | **¥49** | 华尔街交易员风格的每日股票动量分析，每个交易日输出《每日动量报告》，包含市场立场判断和5只潜在涨幅超过5%的股票推荐 |
-| ✍️ **[feelfish-writing](https://github.com/kulolo84/feelfish-writing)** | **¥99** | FeelFish 3.0 专业写作专家，基于多智能体协同的专业创作流水线，四位专家各司其职，帮你高效产出优质内容，小说写作神器 |
-| 🔍 **[tradfi-research-expert](https://github.com/kulolo84/tradfi-research-expert)** | **¥69** | 传统金融研究专家，覆盖宏观经济分析、股票基本面研究、债券收益率曲线、外汇策略、商品分析，为投资决策提供专业分析支持 |
+| 📈 **[每日动量报告](https://github.com/kulolo84/stock-daily-report-buffett)** | **¥29** | 华尔街交易员风格的每日股票动量分析，每个交易日输出《每日动量报告》，包含市场立场判断和5只潜在涨幅超过5%的股票推荐 |
+| ✍️ **[Feelfish 写作助手](https://github.com/kulolo84/feelfish-writing)** | **¥59** | FeelFish 3.0 专业写作专家，基于多智能体协同的专业创作流水线，四位专家各司其职，帮你高效产出优质内容，小说写作神器 |
+| 🔍 **[传统金融研究专家](https://github.com/kulolo84/tradfi-research-expert)** | **¥39** | 传统金融研究专家，覆盖宏观经济分析、股票基本面研究、债券收益率曲线、外汇策略、商品分析，为投资决策提供专业分析支持 |
 
 ---
 
