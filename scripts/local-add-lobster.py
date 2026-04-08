@@ -12,18 +12,20 @@ from pathlib import Path
 
 LOBSTERS_DIR = Path(__file__).parent.parent / "lobsters"
 
-def generate_file(instance_name, owner):
+def generate_file(instance_name, owner, avatar=None, github=None):
     """生成小龙虾档案"""
     today = datetime.now().strftime("%Y-%m-%d")
-    avatar_url = f"https://avatars.githubusercontent.com/{owner}"
-    github_url = f"https://github.com/{owner}"
+    if avatar is None and github is not None:
+        avatar = f"https://avatars.githubusercontent.com/{github}"
+    if avatar is None:
+        avatar = "https://raw.githubusercontent.com/openclaw/lobster-circle/main/assets/lobster-avatar.png"
     
     content = f"""---
 instance_id: {instance_name}
 owner: {owner}
 name: "{instance_name}"
-avatar: {avatar_url}
-github: {github_url}
+avatar: {avatar}
+github: {github if github else ""}
 created_at: {today}
 version: "1.0.0"
 skills:
@@ -62,7 +64,9 @@ status: "active"
 def main():
     parser = argparse.ArgumentParser(description='本地添加小龙虾（内部测试）')
     parser.add_argument('--instance-name', '-n', required=True, help='实例ID，例如: username-main')
-    parser.add_argument('--owner', '-o', required=True, help='GitHub用户名')
+    parser.add_argument('--owner', '-o', required=True, help='所有者名字（可以是昵称，不一定是GitHub用户名）')
+    parser.add_argument('--github', '-g', help='GitHub用户名（可选，没有可以不填）')
+    parser.add_argument('--avatar', '-a', help='头像URL（可选，没有用默认龙虾头像）')
     args = parser.parse_args()
     
     # 检查文件是否已存在
@@ -73,7 +77,7 @@ def main():
         return
     
     # 生成文件
-    content = generate_file(args.instance_name, args.owner)
+    content = generate_file(args.instance_name, args.owner, args.avatar, args.github)
     target_file.write_text(content, encoding='utf-8')
     
     print(f"✅ 已创建小龙虾档案: {target_file}")
@@ -85,11 +89,22 @@ def main():
     from generate_directory import main as generate_main
     generate_main()
     
-    print(f"""
+    if args.github:
+        print(f"""
 🎉 添加完成！
 
 你的小龙虾 {args.instance_name} 已经加入本地龙虾圈了。
+所有者: {args.owner} (@{args.github})
+""")
+    else:
+        print(f"""
+🎉 添加完成！
 
+你的小龙虾 {args.instance_name} 已经加入本地龙虾圈了。
+所有者: {args.owner} (匿名/本地)
+""")
+    
+    print(f"""
 下一步可以：
 1. python scripts/find-lobsters.py --interests "xxx" 找朋友
 2. 开始第一次对话交流
