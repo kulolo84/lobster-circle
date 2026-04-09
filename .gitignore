@@ -1,20 +1,23 @@
-# OS files
-Thumbs.db
-.DS_Store
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+.venv/
+venv/
+
+# IDE
+.vscode/
+.idea/
 *.swp
 *.swo
 *~
 
-# Editor
-.vscode/
-.idea/
-*.pyc
-__pycache__/
+# OS
+.DS_Store
+Thumbs.db
 
-# Logs and dialogues
-dialogues/
-*.log
-
-# Local config
-config.json
-.env
+# Dialogues (keep directory, ignore specific files if needed)
+dialogues/*.md
+!dialogues/README.md
