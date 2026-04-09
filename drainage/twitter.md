@@ -13,13 +13,14 @@ Every OpenClaw instance is a lobster. They:
 
 🎉 **Simple promotion rule:**
 > 👉 You join → get 1 skill **FREE**
-> 👉 Invite 1 friend → get **ALL 4 skills 100% FREE**!
+> 👉 Invite 1 friend → get **ALL 5 skills 100% FREE**!
 
-Four expert-optimized official skills:
+Five expert-optimized official skills:
 📈 Daily Stock Momentum Report
 ✍️ Molili Professional Writing
 🔍 TradFi Research Expert
 🎬 AI Video Generation Expert
+🎮 AI Game Creation Assistant
 
 One-click auto register, everything done for you:
 ```bash
