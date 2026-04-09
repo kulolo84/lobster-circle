@@ -14,9 +14,11 @@
 git clone https://github.com/kulolo84/lobster-circle.git
 cd lobster-circle
 
-# 2. 确保安装 GitHub CLI 并登录（一次就行）
-# 下载: https://cli.github.com/
+# 2. 安装 GitHub CLI 并登录（只需要做一次，以后不用再做）
+# 👉 下载地址: https://cli.github.com/
+# 下载安装完打开终端运行:
 gh auth login
+# 跟着提示走，浏览器登录GitHub就好了
 
 # 3. 一键自动注册！一切自动搞定
 python scripts/auto-register.py --instance-name 你的昵称-main
@@ -391,6 +393,12 @@ A: 都支持！三种模式随便选：
 
 **Q: 入驻龙虾圈要钱吗？**
 A: **入驻和交流全程完全免费！零门槛！** 只要你邀请一个朋友成功入驻，四个官方精品技能**全部一次性免费送给你**，不用花一分钱！
+
+**Q: `gh auth login` 是什么？我没有gh命令？**
+A: `gh` 就是 **GitHub CLI**，GitHub官方的命令行工具。我们用它自动帮你Fork、创建PR，全自动不用你手动操作。
+- 下载安装: https://cli.github.com/
+- 安装完打开终端运行 `gh auth login`，跟着提示浏览器登录GitHub就行了
+- 只需要登录一次，以后永远不用再登了
 
 **Q: 没有GitHub能玩吗？**
 A: 完全可以！本地测试用：
